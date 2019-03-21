@@ -8,7 +8,7 @@ BG_COLOR = (255, 255, 255)
 FPS = 30
 
 MOVE_SPEED = 5
-JUMP = 10
+JUMP = 15
 JUMP_HIGH = JUMP * 10
 
 GRAVITY = 2
@@ -116,7 +116,7 @@ def game():
                 curIndex, playerImage = loadAnimation(curIndex, playerImage, animation.images, isLoadAni, orientation)
 
             if isMove == False: #load image 0 again when dont move!
-                curIndex, playerImage = loadAnimation(-1, playerImage, animation.images, orientation)
+                curIndex, playerImage = loadAnimation(-1, playerImage, animation.images, False, orientation)
 
             if jump == True and isJumping == False:
                 isJumping = True
