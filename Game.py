@@ -82,8 +82,10 @@ def game():
                 if event.type == pygame.KEYDOWN:
                     if event.key == K_LEFT or event.key == ord('a'):
                         moveLeft = True
+                        moveRight = False
                     if event.key == K_RIGHT or event.key == ord('d'):
                         moveRight = True
+                        moveLeft = False
                     if event.key == K_SPACE and isJumping == False:
                         jump = True
                         jumpTarget = playerRect.bottom - JUMP_HIGH
