@@ -15,6 +15,20 @@ GRAVITY = 7
 GROUND = SCREEN_HEIGHT
 START_POS = (0, GROUND)
 
+#handle movement
+def getVelocityMove(cmd):
+    vec = (0,0)
+    if cmd == "goLeft":
+        vec = (-1 * MOVE_SPEED, 0)
+        return vec
+    if cmd == "goRight":
+        vec = (MOVE_SPEED, 0)
+        return vec
+    if cmd == "jump":
+        #code jump here....
+        
+        return vec
+
 
 def releaseGame():
     pygame.quit()
@@ -33,19 +47,6 @@ def loadAnimation(curIndex, sprite, images, isLoadAni = True, orientation = "Rig
         sprite = pygame.transform.flip(sprite, True, False)
         
     return (curIndex, sprite)
-
-def getVelocityMove(cmd):
-    vec = (0,0)
-    if cmd == "goLeft":
-        vec = (-1 * MOVE_SPEED, 0)
-        return vec
-    if cmd == "goRight":
-        vec = (MOVE_SPEED, 0)
-        return vec
-    if cmd == "jump":
-        #code jump here....
-        
-        return vec
 
 def game():
     pygame.init()
