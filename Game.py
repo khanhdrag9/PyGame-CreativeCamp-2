@@ -8,10 +8,10 @@ BG_COLOR = (255, 255, 255)
 FPS = 30
 
 MOVE_SPEED = 5
-JUMP = 15
+JUMP = 20
 JUMP_HIGH = JUMP * 10
 
-GRAVITY = 2
+GRAVITY = 7
 GROUND = SCREEN_HEIGHT
 START_POS = (0, GROUND)
 
@@ -34,6 +34,18 @@ def loadAnimation(curIndex, sprite, images, isLoadAni = True, orientation = "Rig
         
     return (curIndex, sprite)
 
+def getVelocityMove(cmd):
+    vec = (0,0)
+    if cmd == "goLeft":
+        vec = (-1 * MOVE_SPEED, 0)
+        return vec
+    if cmd == "goRight":
+        vec = (MOVE_SPEED, 0)
+        return vec
+    if cmd == "jump":
+        #code jump here....
+        
+        return vec
 
 def game():
     pygame.init()
@@ -87,8 +99,10 @@ def game():
                         moveRight = True
                         moveLeft = False
                     if event.key == K_SPACE and isJumping == False:
-                        jump = True
-                        jumpTarget = playerRect.bottom - JUMP_HIGH
+                        y = getVelocityMove("jump")[1]
+                        if y > 0:
+                            jump = True
+                            jumpTarget = playerRect.bottom - y
                 
                 if event.type == pygame.KEYUP:
                     if event.key == K_LEFT or event.key == ord('a'):
@@ -101,7 +115,7 @@ def game():
                 isMove = True
                 orientation = "Left"
                 if playerRect.left > 0:
-                    playerRect.move_ip(-1 * MOVE_SPEED, 0)
+                    playerRect.move_ip(getVelocityMove("goLeft"))
 
                 isLoadAni = True
                 if isJumping == True : isLoadAni = False
@@ -111,7 +125,7 @@ def game():
                 isMove = True
                 orientation = "Right"
                 if playerRect.right < SCREEN_WIDTH:
-                    playerRect.move_ip(MOVE_SPEED, 0)
+                    playerRect.move_ip(getVelocityMove("goRight"))
 
                 isLoadAni = True
                 if isJumping == True : isLoadAni = False
